@@ -29,7 +29,7 @@ Users engage with this platform when they need to:
 ## Key Moments
 1. **API Configuration**: Seamless setup of Cerebras API credentials with validation
 2. **Real-time Streaming**: Watching code generate character-by-character creates engagement
-3. **Live Preview**: Immediate visual feedback of generated component functionality
+3. **Interactive Preview**: Live Sandpack integration allows immediate testing and interaction with generated components
 
 ## Essential Features
 
@@ -48,10 +48,10 @@ Users engage with this platform when they need to:
 - **Purpose**: Provides immediate feedback and creates engaging user experience
 - **Success Criteria**: Smooth, responsive streaming with proper error handling and cancellation
 
-### Live Code Preview
-- **Functionality**: Real-time rendering of generated React components
-- **Purpose**: Immediate visual validation of generated code functionality
-- **Success Criteria**: Accurate component rendering with error handling for invalid code
+### Live Code Preview with Sandpack
+- **Functionality**: Real-time rendering of generated React components using CodeSandbox's Sandpack technology
+- **Purpose**: Immediate visual validation of generated code functionality with full React ecosystem support
+- **Success Criteria**: Accurate component rendering with error handling, automatic recompilation, and interactive component testing
 
 ### Code Editor Integration
 - **Functionality**: Syntax-highlighted code editing with copy/download capabilities
