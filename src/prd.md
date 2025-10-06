@@ -1,62 +1,63 @@
-# Animated Calculator with Real-Time Streaming - Product Requirements Document
+# RAJ AI App Builder - Product Requirements Document
 
 ## Core Purpose & Success
-- **Mission Statement**: Beautiful, interactive animated calculator with real-time streaming calculations that provides smooth visual feedback and delightful micro-interactions for mathematical operations.
-- **Success Indicators**: Users can perform calculations seamlessly with engaging animations, see real-time calculation streaming, and enjoy a fluid, responsive mathematical experience.
-- **Experience Qualities**: Smooth, Delightful, Precise
+- **Mission Statement**: Enterprise-grade AI-powered platform that converts natural language into production-ready React applications with real-time streaming powered by Cerebras Inference AI model.
+- **Success Indicators**: Users can generate React components from natural language prompts, see code stream in real-time, preview components instantly, and export production-ready code with comprehensive tests.
+- **Experience Qualities**: Intelligent, Professional, Powerful
 
 ## Project Classification & Approach
-- **Complexity Level**: Light Application (calculator functionality with advanced animations and real-time features)
-- **Primary User Activity**: Interacting - Users perform mathematical calculations with engaging visual feedback
+- **Complexity Level**: Complex Application (AI integration, real-time streaming, code generation, live preview)
+- **Primary User Activity**: Creating - Users generate React applications through AI-powered natural language processing
 
 ## Core Problem Analysis
-This calculator solves the problem of boring, static calculator interfaces by providing an engaging, animated experience with real-time streaming calculations that make mathematical operations feel fluid and delightful.
+This platform solves the problem of slow React development by providing an AI-powered interface that generates production-ready components from natural language descriptions, eliminating the need for manual coding and reducing development time from hours to minutes.
 
 ## User Context
-Users engage with this calculator when they need to:
-- Perform quick mathematical calculations with visual feedback
-- Experience smooth, responsive mathematical operations
-- Enjoy a calculator interface that feels modern and engaging
-- See calculation results stream in real-time with smooth animations
+Users engage with this platform when they need to:
+- Rapidly prototype React components without manual coding
+- Generate production-ready code with comprehensive test suites
+- Experience real-time AI code generation with streaming feedback
+- Preview components instantly with live editing capabilities
+- Export clean, well-structured React code for production use
 
 ## Critical Path
-1. User opens calculator interface
-2. User clicks/taps number and operator buttons with visual feedback
-3. Calculator displays numbers and operations with smooth animations
-4. User triggers calculation and sees result stream in real-time
-5. User can continue calculations or clear to start fresh
+1. User configures Cerebras API key in settings
+2. User enters natural language description of desired React component
+3. AI streams generated code in real-time using Cerebras inference
+4. User sees live preview of component as code generates
+5. User can edit, refine, and export the generated component
 
 ## Key Moments
-1. **Button Interactions**: Satisfying button press animations with ripple effects and visual feedback
-2. **Real-time Streaming**: Mathematical operations stream character-by-character creating anticipation
-3. **Result Animation**: Calculated results appear with smooth scaling and color transitions
+1. **AI Streaming**: Watch code generate token-by-token with real-time streaming feedback
+2. **Live Preview**: Instant component rendering as code streams in
+3. **Code Quality**: Clean, production-ready code with comprehensive test coverage
 
 ## Essential Features
 
-### Animated Button Interface
-- **Functionality**: Grid of calculator buttons (0-9, +, -, ×, ÷, =) with press animations, ripple effects, and hover states
-- **Purpose**: Provides tactile feedback and makes interactions feel responsive and satisfying
-- **Success Criteria**: All buttons respond instantly with smooth animations and clear visual feedback
+### AI-Powered Code Generation
+- **Functionality**: Natural language to React component conversion using Cerebras Inference API
+- **Purpose**: Eliminates manual coding, accelerates development workflow
+- **Success Criteria**: Generates clean, functional React components from descriptive prompts
 
-### Real-time Calculation Streaming
-- **Functionality**: Mathematical operations and results stream character-by-character with typing animation
-- **Purpose**: Creates anticipation and engagement during calculation processing
-- **Success Criteria**: Smooth streaming animation with appropriate timing and visual cursor effects
+### Real-time Code Streaming
+- **Functionality**: Token-by-token code streaming with live syntax highlighting
+- **Purpose**: Provides immediate feedback and engaging user experience during generation
+- **Success Criteria**: Smooth streaming with proper syntax highlighting and cursor positioning
 
-### Dynamic Display System
-- **Functionality**: Multi-line display showing current input, operation, and streaming result with smooth transitions
-- **Purpose**: Clear visual hierarchy and state management for calculator operations
-- **Success Criteria**: Display updates smoothly with proper number formatting and operation indicators
+### Live Component Preview
+- **Functionality**: Instant React component rendering with Sandpack integration
+- **Purpose**: Immediate visual feedback of generated components
+- **Success Criteria**: Components render correctly with proper styling and functionality
 
-### Advanced Animations
-- **Functionality**: Smooth transitions between states, button press effects, result highlighting, and micro-interactions
-- **Purpose**: Creates delightful user experience that makes basic calculations feel engaging
-- **Success Criteria**: All animations feel natural, performant, and enhance rather than distract from functionality
+### Settings Management
+- **Functionality**: Secure API key configuration and model parameter settings
+- **Purpose**: User control over AI inference settings and authentication
+- **Success Criteria**: Secure storage of API keys with intuitive configuration interface
 
-### Mathematical Operations Engine
-- **Functionality**: Accurate calculation engine supporting basic arithmetic with error handling
-- **Purpose**: Reliable mathematical operations with proper decimal handling and edge case management
-- **Success Criteria**: Accurate calculations with appropriate error handling for division by zero and overflow conditions
+### Code Export System
+- **Functionality**: Clean code export with TypeScript, tests, and documentation
+- **Purpose**: Production-ready output for immediate project integration
+- **Success Criteria**: Exported code follows best practices and includes comprehensive tests
 
 ## Design Direction
 

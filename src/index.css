@@ -16,7 +16,7 @@
   --popover-foreground: oklch(0.2 0.05 240);
   --primary: oklch(0.45 0.15 240);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.88 0.05 240);
+  --secondary: oklch(0.65 0.15 45);
   --secondary-foreground: oklch(0.2 0.05 240);
   --muted: oklch(0.92 0.02 240);
   --muted-foreground: oklch(0.45 0.05 240);
@@ -52,90 +52,11 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-family-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-.streaming-cursor::after {
-  content: '|';
-  animation: blink 1s infinite;
-  color: var(--accent);
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-.code-editor {
-  font-family: var(--font-family-mono);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.gradient-border {
-  background: linear-gradient(135deg, var(--primary), var(--accent)) padding-box,
-              linear-gradient(135deg, var(--primary), var(--accent)) border-box;
-  border: 2px solid transparent;
-}
-
-body{
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
-/* Enhanced calculator-specific styles */
-.calculator-button {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.calculator-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.calculator-button:hover::before {
-  left: 100%;
-}
-
-.calculator-display {
-  background: linear-gradient(135deg, var(--muted), oklch(0.94 0.01 240));
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--border);
-}
-
-.gradient-bg {
-  background: linear-gradient(135deg, 
-    oklch(0.98 0.01 240), 
-    oklch(0.96 0.01 260), 
-    oklch(0.98 0.01 220)
-  );
-}
-
-/* Ripple effect */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-.ripple-effect {
-  animation: ripple 0.6s linear;
-}
-
-/* Improved streaming cursor */
+/* Streaming cursor animation */
 .streaming-cursor::after {
   content: '|';
   animation: cursor-blink 1.2s ease-in-out infinite;
@@ -149,13 +70,75 @@ body{
   100% { opacity: 1; }
 }
 
-/* Button press feedback */
-.button-pressed {
-  transform: scale(0.95);
-  transition: transform 0.1s ease-out;
+/* Code editor styles */
+.code-editor {
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Enhanced gradient backgrounds */
+.gradient-border {
+  background: linear-gradient(135deg, var(--primary), var(--accent)) padding-box,
+              linear-gradient(135deg, var(--primary), var(--accent)) border-box;
+  border: 2px solid transparent;
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* Smooth transitions for all interactive elements */
 * {
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Loading animation for AI generation */
+.ai-loading {
+  background: linear-gradient(90deg, 
+    var(--muted) 25%, 
+    var(--accent) 50%, 
+    var(--muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: ai-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes ai-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Preview panel enhancements */
+.preview-container {
+  background: linear-gradient(135deg, 
+    oklch(0.98 0.01 240), 
+    oklch(0.96 0.01 260), 
+    oklch(0.98 0.01 220)
+  );
+}
+
+/* Sandpack customizations */
+.sp-wrapper {
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+}
+
+.sp-layout {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+}
+
+.sp-preview-container {
+  background: var(--background) !important;
+}
+
+/* Enhanced focus states */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
