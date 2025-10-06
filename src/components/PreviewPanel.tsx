@@ -13,7 +13,7 @@ interface PreviewPanelProps {
 export function PreviewPanel({ code }: PreviewPanelProps) {
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // Parse the generated code to create a proper React component structure
+  // Clean and parse the generated code to create a proper React component structure
   const sandpackFiles = useMemo(() => {
     if (!code.trim()) {
       return {
@@ -43,8 +43,12 @@ root.render(<App />);`
       };
     }
 
-    // Try to extract component code and create a proper structure
-    let componentCode = code;
+    // Clean the code by removing markdown code fences and extra formatting
+    let componentCode = code
+      .replace(/^```(tsx?|javascript|jsx?)?\s*\n/gm, '') // Remove opening code fences
+      .replace(/\n```\s*$/gm, '') // Remove closing code fences
+      .replace(/^\s*```\s*$/gm, '') // Remove standalone code fence lines
+      .trim();
     
     // If the code doesn't include export, add it
     if (!componentCode.includes('export')) {

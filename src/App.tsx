@@ -59,16 +59,23 @@ Return only the component code, well-formatted and production-ready.`;
       // Get the response
       const response = await window.spark.llm(aiPrompt, 'gpt-4o');
       
+      // Clean the response by removing markdown code fences
+      const cleanedResponse = response
+        .replace(/^```(tsx?|javascript|jsx?)?\s*\n/gm, '') // Remove opening code fences
+        .replace(/\n```\s*$/gm, '') // Remove closing code fences
+        .replace(/^\s*```\s*$/gm, '') // Remove standalone code fence lines
+        .trim();
+      
       // Simulate streaming by revealing characters progressively
-      for (let i = 0; i <= response.length; i++) {
-        setStreamingCode(response.slice(0, i));
+      for (let i = 0; i <= cleanedResponse.length; i++) {
+        setStreamingCode(cleanedResponse.slice(0, i));
         await new Promise(resolve => setTimeout(resolve, 20));
       }
 
       // Generate tests and documentation
       const testPrompt = window.spark.llmPrompt`Generate comprehensive Jest/React Testing Library tests for this React component:
 
-${response}
+${cleanedResponse}
 
 Include:
 - Render tests
@@ -82,7 +89,7 @@ Return only the test code.`;
 
       const docsPrompt = window.spark.llmPrompt`Generate clear documentation for this React component:
 
-${response}
+${cleanedResponse}
 
 Include:
 - Component description
@@ -95,7 +102,7 @@ Format as markdown.`;
       const docs = await window.spark.llm(docsPrompt, 'gpt-4o');
 
       setGeneratedCode({
-        component: response,
+        component: cleanedResponse,
         tests,
         docs
       });
