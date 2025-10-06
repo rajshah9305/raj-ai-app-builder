@@ -32,12 +32,7 @@ function App() {
   const [apiKey, setApiKey] = useKV('cerebras_api_key', '');
 
   const handleGenerate = async (prompt: string) => {
-    if (!apiKey) {
-      setShowSettings(true);
-      toast.error('Please configure your Cerebras API key first');
-      return;
-    }
-
+    // No API key needed since we're using the built-in spark.llm API
     setIsGenerating(true);
     setStreamingCode('');
     setGeneratedCode(null);
@@ -131,14 +126,14 @@ Format as markdown.`;
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/50 to-background">
       <Header 
         onOpenSettings={() => setShowSettings(true)} 
-        hasApiKey={!!apiKey}
+        hasApiKey={true}
       />
       
       <main className="container mx-auto px-4 py-8 space-y-8">
         <PromptInput 
           onGenerate={handleGenerate}
           isGenerating={isGenerating}
-          disabled={!apiKey}
+          disabled={false}
         />
 
         <div className="grid lg:grid-cols-2 gap-8">

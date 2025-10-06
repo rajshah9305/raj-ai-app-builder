@@ -23,9 +23,9 @@ export function Header({ onOpenSettings, hasApiKey }: HeaderProps) {
           
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <div className={`w-2 h-2 rounded-full ${hasApiKey ? 'bg-secondary' : 'bg-destructive'}`} />
+              <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
               <span className="text-sm text-muted-foreground">
-                {hasApiKey ? 'API Connected' : 'API Required'}
+                Spark AI Ready
               </span>
             </div>
             <Button variant="outline" size="sm" onClick={onOpenSettings}>
