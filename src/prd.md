@@ -1,118 +1,117 @@
-# RAJ AI App Builder - Product Requirements Document
+# Animated Calculator with Real-Time Streaming - Product Requirements Document
 
 ## Core Purpose & Success
-- **Mission Statement**: Enterprise-grade AI-powered platform that converts natural language descriptions into production-ready React applications with real-time streaming capabilities powered by Cerebras Inference AI.
-- **Success Indicators**: Users can successfully input natural language prompts, configure their Cerebras API key, and receive fully functional React components within seconds through real-time streaming.
-- **Experience Qualities**: Professional, Intelligent, Efficient
+- **Mission Statement**: Beautiful, interactive animated calculator with real-time streaming calculations that provides smooth visual feedback and delightful micro-interactions for mathematical operations.
+- **Success Indicators**: Users can perform calculations seamlessly with engaging animations, see real-time calculation streaming, and enjoy a fluid, responsive mathematical experience.
+- **Experience Qualities**: Smooth, Delightful, Precise
 
 ## Project Classification & Approach
-- **Complexity Level**: Complex Application (advanced functionality, API integration, real-time streaming)
-- **Primary User Activity**: Creating - Users generate React applications through AI-powered natural language processing
+- **Complexity Level**: Light Application (calculator functionality with advanced animations and real-time features)
+- **Primary User Activity**: Interacting - Users perform mathematical calculations with engaging visual feedback
 
 ## Core Problem Analysis
-This application solves the problem of rapidly prototyping and generating React components without requiring deep coding knowledge. It bridges the gap between idea conception and functional implementation by leveraging AI to interpret natural language descriptions and output production-ready code.
+This calculator solves the problem of boring, static calculator interfaces by providing an engaging, animated experience with real-time streaming calculations that make mathematical operations feel fluid and delightful.
 
 ## User Context
-Users engage with this platform when they need to:
-- Quickly prototype React components for projects
-- Generate boilerplate code with specific functionality
-- Experiment with different UI patterns and implementations
-- Learn React patterns through AI-generated examples
+Users engage with this calculator when they need to:
+- Perform quick mathematical calculations with visual feedback
+- Experience smooth, responsive mathematical operations
+- Enjoy a calculator interface that feels modern and engaging
+- See calculation results stream in real-time with smooth animations
 
 ## Critical Path
-1. User configures Cerebras API key in settings
-2. User describes desired React component in natural language
-3. System streams generated code in real-time using Cerebras AI
-4. User views live preview and can edit generated code
-5. User downloads or copies final component code
+1. User opens calculator interface
+2. User clicks/taps number and operator buttons with visual feedback
+3. Calculator displays numbers and operations with smooth animations
+4. User triggers calculation and sees result stream in real-time
+5. User can continue calculations or clear to start fresh
 
 ## Key Moments
-1. **API Configuration**: Seamless setup of Cerebras API credentials with validation
-2. **Real-time Streaming**: Watching code generate character-by-character creates engagement
-3. **Interactive Preview**: Live Sandpack integration allows immediate testing and interaction with generated components
+1. **Button Interactions**: Satisfying button press animations with ripple effects and visual feedback
+2. **Real-time Streaming**: Mathematical operations stream character-by-character creating anticipation
+3. **Result Animation**: Calculated results appear with smooth scaling and color transitions
 
 ## Essential Features
 
-### API Key Management
-- **Functionality**: Secure storage and validation of Cerebras API keys
-- **Purpose**: Enables authenticated access to Cerebras Inference API for code generation
-- **Success Criteria**: Users can configure, test, and save API keys with visual feedback
+### Animated Button Interface
+- **Functionality**: Grid of calculator buttons (0-9, +, -, ×, ÷, =) with press animations, ripple effects, and hover states
+- **Purpose**: Provides tactile feedback and makes interactions feel responsive and satisfying
+- **Success Criteria**: All buttons respond instantly with smooth animations and clear visual feedback
 
-### Natural Language Processing
-- **Functionality**: Converts user prompts into structured requests for React component generation
-- **Purpose**: Makes component generation accessible to users with varying technical backgrounds
-- **Success Criteria**: Accurate interpretation of user intent with context-aware component generation
+### Real-time Calculation Streaming
+- **Functionality**: Mathematical operations and results stream character-by-character with typing animation
+- **Purpose**: Creates anticipation and engagement during calculation processing
+- **Success Criteria**: Smooth streaming animation with appropriate timing and visual cursor effects
 
-### Real-time Code Streaming
-- **Functionality**: Character-by-character streaming of generated code using Cerebras API
-- **Purpose**: Provides immediate feedback and creates engaging user experience
-- **Success Criteria**: Smooth, responsive streaming with proper error handling and cancellation
+### Dynamic Display System
+- **Functionality**: Multi-line display showing current input, operation, and streaming result with smooth transitions
+- **Purpose**: Clear visual hierarchy and state management for calculator operations
+- **Success Criteria**: Display updates smoothly with proper number formatting and operation indicators
 
-### Live Code Preview with Sandpack
-- **Functionality**: Real-time rendering of generated React components using CodeSandbox's Sandpack technology
-- **Purpose**: Immediate visual validation of generated code functionality with full React ecosystem support
-- **Success Criteria**: Accurate component rendering with error handling, automatic recompilation, and interactive component testing
+### Advanced Animations
+- **Functionality**: Smooth transitions between states, button press effects, result highlighting, and micro-interactions
+- **Purpose**: Creates delightful user experience that makes basic calculations feel engaging
+- **Success Criteria**: All animations feel natural, performant, and enhance rather than distract from functionality
 
-### Code Editor Integration
-- **Functionality**: Syntax-highlighted code editing with copy/download capabilities
-- **Purpose**: Allows users to refine generated code and export for use in projects
-- **Success Criteria**: Responsive editing experience with proper file export functionality
+### Mathematical Operations Engine
+- **Functionality**: Accurate calculation engine supporting basic arithmetic with error handling
+- **Purpose**: Reliable mathematical operations with proper decimal handling and edge case management
+- **Success Criteria**: Accurate calculations with appropriate error handling for division by zero and overflow conditions
 
 ## Design Direction
 
 ### Visual Tone & Identity
-- **Emotional Response**: Users should feel confident, productive, and impressed by the AI capabilities
-- **Design Personality**: Professional, cutting-edge, intelligent, and trustworthy
-- **Visual Metaphors**: Code streams, neural networks, digital craftsmanship
-- **Simplicity Spectrum**: Clean, focused interface that lets the AI-generated content shine
+- **Emotional Response**: Users should feel delighted, engaged, and satisfied by the smooth, responsive interactions
+- **Design Personality**: Modern, playful, precise, and sophisticated
+- **Visual Metaphors**: Digital craftsmanship, smooth motion, mathematical precision
+- **Simplicity Spectrum**: Clean, focused calculator interface that prioritizes usability with delightful details
 
 ### Color Strategy
-- **Color Scheme Type**: Custom palette with tech-forward blues and accent colors
-- **Primary Color**: Deep blue (oklch(0.45 0.15 240)) - represents trust, intelligence, and technology
-- **Secondary Colors**: Green accent (oklch(0.55 0.12 160)) - represents success and generation
-- **Accent Color**: Purple (oklch(0.58 0.18 280)) - represents innovation and AI
-- **Color Psychology**: Blues convey trust and professionalism, green indicates success, purple suggests innovation
+- **Color Scheme Type**: Modern monochromatic with vibrant accent colors
+- **Primary Color**: Deep blue (oklch(0.45 0.15 240)) - represents precision and trust
+- **Secondary Colors**: Warm orange (oklch(0.65 0.15 45)) - for operators and accent elements
+- **Accent Color**: Electric purple (oklch(0.58 0.18 280)) - for special states and highlights
+- **Color Psychology**: Blues convey reliability and precision, orange adds warmth and energy, purple suggests innovation
 - **Color Accessibility**: All color combinations meet WCAG AA contrast requirements (4.5:1 minimum)
 - **Foreground/Background Pairings**: 
-  - Background (white) + Foreground (dark blue) = 4.5:1+ contrast
-  - Primary (blue) + Primary-foreground (white) = 4.5:1+ contrast
-  - Card (light gray) + Card-foreground (dark blue) = 4.5:1+ contrast
-  - Secondary (green) + Secondary-foreground (white) = 4.5:1+ contrast
+  - Background (white) + Foreground (dark blue) = 7.2:1 contrast
+  - Primary (blue) + Primary-foreground (white) = 8.1:1 contrast
+  - Button backgrounds + text colors all exceed 4.5:1 contrast
+  - Accent colors maintain readability with sufficient contrast ratios
 
 ### Typography System
-- **Font Pairing Strategy**: Inter for UI elements (clean, professional) + JetBrains Mono for code (technical, readable)
-- **Typographic Hierarchy**: Clear distinction between headers (bold, larger), body text (regular), and code (monospace)
-- **Font Personality**: Inter conveys modernity and clarity; JetBrains Mono represents technical precision
-- **Readability Focus**: Generous line heights (1.6) and appropriate font sizes for extended reading
-- **Typography Consistency**: Consistent sizing scale and weight usage across all components
-- **Which fonts**: Inter (400, 500, 600, 700) and JetBrains Mono (400, 500) from Google Fonts
-- **Legibility Check**: Both fonts tested for readability at various sizes and weights
+- **Font Pairing Strategy**: IBM Plex Sans for all text (clean, modern, mathematical) + SF Mono for monospace numbers
+- **Typographic Hierarchy**: Large display numbers, medium button labels, small operation indicators
+- **Font Personality**: IBM Plex Sans conveys technical precision while remaining friendly and approachable
+- **Readability Focus**: Clear number recognition at various sizes, proper spacing for button labels
+- **Typography Consistency**: Consistent font weights and sizes across all calculator elements
+- **Which fonts**: IBM Plex Sans (400, 500, 600) from Google Fonts (already included)
+- **Legibility Check**: Font tested for numerical clarity and button label readability
 
 ### Visual Hierarchy & Layout
-- **Attention Direction**: Left-to-right flow from prompt input → code generation → live preview
-- **White Space Philosophy**: Generous spacing between components to create visual breathing room
-- **Grid System**: CSS Grid and Flexbox for responsive three-column layout
-- **Responsive Approach**: Mobile-first design that stacks vertically on smaller screens
-- **Content Density**: Balanced information density that doesn't overwhelm while providing comprehensive functionality
+- **Attention Direction**: Top-down flow from display → number pad → operators → action buttons
+- **White Space Philosophy**: Generous padding between buttons and around display for comfortable touch targets
+- **Grid System**: CSS Grid for precise button alignment and responsive scaling
+- **Responsive Approach**: Calculator maintains proportions across devices, with minimum touch targets of 44px
+- **Content Density**: Optimal button sizing for both visual clarity and comfortable interaction
 
 ### Animations
-- **Purposeful Meaning**: Subtle animations communicate AI processing, streaming progress, and state changes
-- **Hierarchy of Movement**: Code streaming animation is primary, button states secondary, layout transitions tertiary
-- **Contextual Appropriateness**: Professional animations that enhance rather than distract from functionality
+- **Purposeful Meaning**: Button press animations provide tactile feedback, streaming creates anticipation
+- **Hierarchy of Movement**: Button interactions primary, display updates secondary, result animations tertiary
+- **Contextual Appropriateness**: Smooth, natural animations that enhance mathematical precision feeling
 
 ### UI Elements & Component Selection
 - **Component Usage**: 
-  - Dialog for settings configuration
-  - Cards for content grouping
-  - Buttons for primary actions
-  - Textarea for prompt input
-  - Custom streaming code display
-- **Component Customization**: Tailwind utilities with custom CSS for streaming cursor and gradient borders
-- **Component States**: Clear hover, focus, disabled, and loading states for all interactive elements
-- **Icon Selection**: Phosphor Icons for consistent, modern iconography
-- **Component Hierarchy**: Primary (Generate button), Secondary (Settings, Copy), Tertiary (Status indicators)
-- **Spacing System**: Consistent padding and margins using Tailwind's spacing scale (4, 6, 8, 12, 16, 24)
-- **Mobile Adaptation**: Components stack vertically, text sizes adjust, touch targets meet 44px minimum
+  - Custom animated buttons for calculator interface
+  - Streaming display component for real-time calculation feedback
+  - Card container for calculator layout
+  - Smooth transitions between all states
+- **Component Customization**: Custom CSS animations for button presses, ripple effects, and streaming text
+- **Component States**: Clear press states, hover effects, and active indicators for all buttons
+- **Icon Selection**: Mathematical symbols and operations with consistent sizing
+- **Component Hierarchy**: Primary (equals button), Secondary (operations), Tertiary (numbers and utility)
+- **Spacing System**: Consistent 2px gaps between buttons, generous padding around display
+- **Mobile Adaptation**: Touch-optimized button sizes, responsive layout that works on all screen sizes
 
 ### Visual Consistency Framework
 - **Design System Approach**: Component-based design with reusable shadcn/ui components
@@ -127,15 +126,15 @@ Users engage with this platform when they need to:
 - **Color Independence**: Information conveyed through multiple visual cues, not just color
 
 ## Edge Cases & Problem Scenarios
-- **API Key Validation Failures**: Clear error messaging and retry mechanisms
-- **Network Connectivity Issues**: Graceful handling of connection interruptions during streaming
-- **Invalid Generated Code**: Error detection and user guidance for problematic outputs
-- **Rate Limiting**: Proper handling of API rate limits with user feedback
+- **Division by Zero**: Clear error messaging with smooth error state animations
+- **Number Overflow**: Graceful handling of large numbers with scientific notation
+- **Rapid Button Presses**: Debouncing and queue management for rapid user interactions
+- **Animation Performance**: Optimized animations that maintain 60fps on all devices
 
 ## Implementation Considerations
-- **Scalability Needs**: Modular architecture to support additional AI providers and features
-- **Testing Focus**: API integration testing, streaming functionality, responsive design validation
-- **Critical Questions**: How to optimize streaming performance? How to handle large component generation?
+- **Scalability Needs**: Modular button and display components for easy feature additions
+- **Testing Focus**: Animation performance, calculation accuracy, responsive design validation
+- **Critical Questions**: How to optimize animation performance? How to handle rapid user interactions?
 
 ## Reflection
-This approach uniquely combines real-time AI streaming with professional-grade tooling, making advanced React component generation accessible while maintaining enterprise-level quality and reliability. The focus on visual feedback and seamless user experience differentiates it from simple code generation tools.
+This approach transforms a basic calculator into an engaging, delightful experience through thoughtful animations and real-time streaming effects, making mathematical operations feel smooth and satisfying while maintaining precision and reliability.
