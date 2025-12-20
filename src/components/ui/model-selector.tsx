@@ -134,19 +134,19 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`flex items-center gap-2 px-3 py-1.5 bg-transparent border border-gray-300 rounded-md hover:border-[#ff6600] focus:outline-none focus:ring-1 focus:ring-[#ff6600] transition-colors text-xs ${
+        className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-transparent border border-gray-300 rounded-md hover:border-[#ff6600] focus:outline-none focus:ring-1 focus:ring-[#ff6600] transition-colors text-xs sm:text-xs ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
-        <SparklesIcon size={14} className="text-[#ff6600]" />
-        <span className="text-gray-600">
+        <SparklesIcon size={12} className="text-[#ff6600] sm:size-3.5" />
+        <span className="text-gray-600 text-xs sm:text-xs">
           {selectedModels.length === 0 ? 'Select AI' : 
            selectedModels.length === 1 ? AI_MODELS.find(m => m.id === selectedModels[0])?.displayName?.split(' ')[0] || 'AI' :
            `${selectedModels.length} models`}
         </span>
         <ChevronDownIcon 
-          size={12} 
-          className={`text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+          size={10} 
+          className={`text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''} sm:size-3`} 
         />
       </button>
 
@@ -179,26 +179,26 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <div className="flex items-center space-x-3 mb-2">
-                          <span className="text-lg">{getCategoryIcon(model.category)}</span>
+                        <div className="flex items-center space-x-2 sm:space-x-3 mb-1 sm:mb-2">
+                          <span className="text-base sm:text-lg">{getCategoryIcon(model.category)}</span>
                           <div>
-                            <div className="flex items-center space-x-2">
-                              <span className="font-semibold text-black">{model.displayName}</span>
+                            <div className="flex items-center space-x-1 sm:space-x-2">
+                              <span className="font-semibold text-black text-sm sm:text-base">{model.displayName}</span>
                               {model.recommended && (
-                                <span className="px-2 py-1 text-xs bg-[#ff6600] text-white rounded-full">
+                                <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs bg-[#ff6600] text-white rounded-full">
                                   Recommended
                                 </span>
                               )}
                             </div>
-                            <div className="text-sm text-gray-600 mt-1">{model.description}</div>
+                            <div className="text-xs sm:text-sm text-gray-600 mt-1">{model.description}</div>
                           </div>
                         </div>
                         
-                        <div className="flex flex-wrap gap-2 mb-2">
+                        <div className="flex flex-wrap gap-1 sm:gap-2 mb-1 sm:mb-2">
                           {model.features.map((feature) => (
                             <span
                               key={feature}
-                              className={`px-2 py-1 text-xs rounded-full border ${getCategoryColor(model.category)}`}
+                              className={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs rounded-full border ${getCategoryColor(model.category)}`}
                             >
                               {feature}
                             </span>
@@ -210,9 +210,9 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                         </div>
                       </div>
                       
-                      <div className="ml-3 flex-shrink-0">
+                      <div className="ml-2 sm:ml-3 flex-shrink-0">
                         {selectedModels.includes(model.id) && (
-                          <CheckIcon size={20} className="text-[#ff6600]" />
+                          <CheckIcon size={16} className="text-[#ff6600] sm:size-5" />
                         )}
                       </div>
                     </div>
@@ -221,13 +221,13 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
               ))}
             </div>
             
-            <div className="p-3 border-t border-gray-100 bg-gray-50 rounded-b-xl">
+            <div className="p-2 sm:p-3 border-t border-gray-100 bg-gray-50 rounded-b-xl">
               <div className="text-xs text-gray-600">
-                💡 Tip: Select multiple models for enhanced code generation with intelligent fallback
+                💡 Tip: Select multiple models for enhanced reliability
               </div>
               {selectedModels.length > 1 && (
                 <div className="text-xs text-[#ff6600] mt-1 font-medium">
-                  ✨ Multi-model mode active - Enhanced reliability enabled
+                  ✨ Multi-model mode active
                 </div>
               )}
             </div>

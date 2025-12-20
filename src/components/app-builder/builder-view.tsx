@@ -59,64 +59,62 @@ const BuilderViewComponent = ({
 
   return (
     <div className="h-screen bg-white flex flex-col">
-      <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+      <div className="border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-4 w-full">
           <button
             onClick={onBack}
-            className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
+            className="px-3 sm:px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2 text-sm sm:text-base"
           >
             ← Back
           </button>
-          <div className="h-6 w-px bg-gray-300" />
+          <div className="h-6 w-px bg-gray-300 hidden sm:block" />
           <button
             onClick={onReset}
-            className="px-4 py-2 text-black hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2"
+            className="px-3 sm:px-4 py-2 text-black hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2 text-sm sm:text-base"
             title="Start fresh with a new project"
           >
-            <RotateCcw className="w-4 h-4" />
-            New Project
+            <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">New Project</span>
+            <span className="sm:hidden">New</span>
           </button>
-          <div className="h-6 w-px bg-gray-300" />
-          <h2 className="text-sm text-gray-600 max-w-md truncate">{prompt}</h2>
+          <div className="h-6 w-px bg-gray-300 hidden sm:block" />
+          <h2 className="text-xs sm:text-sm text-gray-600 max-w-xs sm:max-w-md truncate flex-1">{prompt}</h2>
           {selectedModels.length > 0 && (
-            <>
-              <div className="h-6 w-px bg-gray-300" />
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Models:</span>
-                <div className="flex items-center gap-1">
-                  {selectedModels.slice(0, 2).map((model, index) => (
-                    <span key={model} className="text-xs bg-[#fff5f0] text-[#ff6600] px-2 py-1 rounded-full border border-[#ff6600]">
-                      {model.includes('llama-3.3') ? 'Llama 3.3' :
-                       model.includes('llama-4-maverick') ? 'Llama 4M' :
-                       model.includes('llama-4-scout') ? 'Llama 4S' :
-                       model.includes('gpt-oss') ? 'GPT-OSS' :
-                       model.includes('kimi') ? 'Kimi K2' : 'AI'}
-                    </span>
-                  ))}
-                  {selectedModels.length > 2 && (
-                    <span className="text-xs text-gray-500">+{selectedModels.length - 2} more</span>
-                  )}
-                </div>
+            <div className="flex items-center gap-1 sm:gap-2 ml-auto">
+              <span className="text-xs text-gray-500 hidden sm:inline">Models:</span>
+              <div className="flex items-center gap-1">
+                {selectedModels.slice(0, 1).map((model, index) => (
+                  <span key={model} className="text-xs bg-[#fff5f0] text-[#ff6600] px-2 py-1 rounded-full border border-[#ff6600]">
+                    {model.includes('llama-3.3') ? 'Llama 3.3' :
+                     model.includes('llama-4-maverick') ? 'Llama 4M' :
+                     model.includes('llama-4-scout') ? 'Llama 4S' :
+                     model.includes('gpt-oss') ? 'GPT-OSS' :
+                     model.includes('kimi') ? 'Kimi K2' : 'AI'}
+                  </span>
+                ))}
+                {selectedModels.length > 1 && (
+                  <span className="text-xs text-gray-500">+{selectedModels.length - 1} more</span>
+                )}
               </div>
-            </>
+            </div>
           )}
         </div>
         {isGenerating && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <EnhancedSpinner
-              size={32}
-              message="Generating your app"
-              subMessage={`${streamingCode?.length || 0} characters generated`}
+              size={28}
+              message="Generating"
+              subMessage={`${streamingCode?.length || 0} chars`}
             />
           </div>
         )}
       </div>
 
-      <div className="flex-1 flex overflow-hidden">
-        <div className="w-1/2 border-r border-gray-200 flex flex-col">
-          <div className="border-b border-gray-200 px-6 py-3 flex items-center justify-between bg-gray-50">
-            <div className="flex items-center gap-3">
-              <h3 className="font-medium text-black">Code</h3>
+      <div className="flex-1 flex flex-col sm:flex-row overflow-hidden tablet-spacing">
+        <div className="w-full sm:w-1/2 border-b sm:border-r sm:border-b-0 border-gray-200 flex flex-col">
+          <div className="border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between bg-gray-50">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <h3 className="font-medium text-black text-sm sm:text-base">Code</h3>
               {isStreamingComplete && (
                 <div className="flex items-center gap-1 text-green-600">
                   <div className="w-2 h-2 bg-green-600 rounded-full"></div>
@@ -124,31 +122,31 @@ const BuilderViewComponent = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               {streamingCode && (
-                <span className="text-xs text-gray-500 mr-2">
+                <span className="text-xs text-gray-500 mr-1 sm:mr-2">
                   {streamingCode.length} chars
                 </span>
               )}
               <button
                 onClick={handleCopy}
                 disabled={!generatedCode && !streamingCode}
-                className="p-2 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-1.5 sm:p-2 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Copy code"
               >
-                <Copy className="w-4 h-4 text-black" />
+                <Copy className="w-3 h-3 sm:w-4 sm:h-4 text-black" />
               </button>
               <button
                 onClick={handleExport}
                 disabled={!generatedCode && !streamingCode}
-                className="p-2 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-1.5 sm:p-2 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Export code"
               >
-                <Download className="w-4 h-4 text-black" />
+                <Download className="w-3 h-3 sm:w-4 sm:h-4 text-black" />
               </button>
             </div>
           </div>
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden min-h-[200px] sm:min-h-0">
             <Editor
               height="100%"
               defaultLanguage="typescript"
@@ -157,7 +155,7 @@ const BuilderViewComponent = ({
               options={{
                 readOnly: isGenerating,
                 minimap: { enabled: false },
-                fontSize: 14,
+                fontSize: 12,
                 lineNumbers: 'on',
                 scrollBeyondLastLine: false,
                 automaticLayout: true,
@@ -208,10 +206,10 @@ const BuilderViewComponent = ({
           </div>
         </div>
 
-        <div className="w-1/2 flex flex-col">
-          <div className="border-b border-gray-200 px-6 py-3 bg-gray-50 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <h3 className="font-medium text-black">Live Preview</h3>
+        <div className="w-full sm:w-1/2 flex flex-col">
+          <div className="border-b border-gray-200 px-4 sm:px-6 py-3 bg-gray-50 flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <h3 className="font-medium text-black text-sm sm:text-base">Live Preview</h3>
               {(generatedCode || streamingCode) && (
                 <div className="flex items-center gap-1 text-green-600">
                   <div className="w-2 h-2 bg-green-600 rounded-full"></div>
@@ -229,7 +227,7 @@ const BuilderViewComponent = ({
               </button>
             )}
           </div>
-          <div className="flex-1 overflow-auto bg-white">
+          <div className="flex-1 overflow-auto bg-white min-h-[200px] sm:min-h-0">
             <PreviewComponent
               isGenerating={isGenerating}
               streamingCode={streamingCode}

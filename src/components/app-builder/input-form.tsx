@@ -48,13 +48,13 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-3xl"
+        className="w-full max-w-md sm:max-w-2xl md:max-w-3xl px-2 sm:px-0 tablet-optimized"
       >
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-light mb-4 text-black">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-light mb-3 sm:mb-4 text-black">
             Build your <AnimatedTextCycle words={['app', 'component', 'interface', 'design', 'prototype']} className="text-[#ff6600]" /> with AI
           </h1>
-          <p className="text-gray-600 text-lg">Describe what you want to build, and watch it come to life</p>
+          <p className="text-gray-600 text-base sm:text-lg tablet-text">Describe what you want to build, and watch it come to life</p>
         </div>
 
         <div className="relative">
@@ -64,11 +64,11 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Describe your app... (e.g., 'Create a todo list with add, delete, and mark as done features')"
-            className="w-full min-h-[120px] max-h-[400px] p-6 pr-24 text-black bg-white border-2 border-black rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent text-lg"
+            className="w-full min-h-[120px] max-h-[400px] p-4 sm:p-6 pr-16 sm:pr-24 text-black bg-white border-2 border-black rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent text-base sm:text-lg"
             rows={1}
             disabled={isGenerating}
           />
-          <div className="absolute bottom-4 right-20">
+          <div className="absolute bottom-3 sm:bottom-4 right-12 sm:right-20">
             <ModelSelector
               selectedModels={selectedModels}
               onModelChange={setSelectedModels}
@@ -79,13 +79,13 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
           <button
             onClick={handleSubmit}
             disabled={!prompt.trim() || isGenerating || selectedModels.length === 0}
-            className="absolute bottom-4 right-4 w-12 h-12 bg-[#ff6600] hover:bg-[#ff8533] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center transition-colors"
+            className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-[#ff6600] hover:bg-[#ff8533] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-full flex items-center justify-center transition-colors"
           >
-            <ArrowUpIcon size={20} />
+            <ArrowUpIcon size={16} className="sm:size-5" />
           </button>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           {[
             'Create a todo list app',
             'Build a calculator interface',
@@ -104,9 +104,9 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
               }
             }}
               disabled={isGenerating}
-              className="p-4 text-left border border-gray-300 rounded-xl hover:border-[#ff6600] hover:bg-gray-50 transition-colors text-black disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-3 sm:p-4 text-left border border-gray-300 rounded-xl hover:border-[#ff6600] hover:bg-gray-50 transition-colors text-sm sm:text-base text-black disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span className="text-sm">{suggestion}</span>
+              <span className="text-xs sm:text-sm">{suggestion}</span>
             </motion.button>
           ))}
         </div>
