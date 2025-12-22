@@ -12,10 +12,7 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', '@monaco-editor/react'],
   },
 
-  // Turbopack configuration for Next.js 16+
-  turbopack: {},
-
-  // Webpack configuration (kept for compatibility and fallback)
+  // Webpack configuration
   webpack: (config, { dev, isServer }) => {
     // Fallbacks for Node.js modules
     config.resolve.fallback = {
