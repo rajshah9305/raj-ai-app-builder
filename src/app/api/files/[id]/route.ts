@@ -7,7 +7,12 @@ export async function PUT(
 ) {
   try {
     const { id } = await context.params;
-    const { projectId, path, content } = await request.json();
+    const body = await request.json() as { projectId?: string; path?: string; content?: string };
+    const { projectId, path, content } = body;
+
+    if (!projectId || !path || content === undefined) {
+      return NextResponse.json({ error: 'Missing required fields: projectId, path, content' }, { status: 400 });
+    }
 
     const file = await storage.files.update(projectId, path, content);
 
@@ -24,7 +29,12 @@ export async function DELETE(
 ) {
   try {
     const { id } = await context.params;
-    const { projectId, path } = await request.json();
+    const body = await request.json() as { projectId?: string; path?: string };
+    const { projectId, path } = body;
+
+    if (!projectId || !path) {
+      return NextResponse.json({ error: 'Missing required fields: projectId, path' }, { status: 400 });
+    }
 
     await storage.files.delete(projectId, path);
 

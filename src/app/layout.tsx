@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { ProjectProvider } from '@/context/ProjectContext';
 import { ErrorBoundary } from '@/components/ui/error-boundary';
 import '@/styles/globals.css';
 import { Toaster } from 'sonner';
@@ -23,10 +22,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ErrorBoundary>
-          <ProjectProvider>
-            {children}
-            <Toaster position="bottom-right" richColors />
-          </ProjectProvider>
+          {children}
+          <Toaster position="bottom-right" richColors />
         </ErrorBoundary>
       </body>
     </html>

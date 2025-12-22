@@ -40,10 +40,3 @@ export interface GenerationResult {
   success: boolean;
   error?: string;
 }
-
-export interface FileStructure {
-  path: string;
-  name: string;
-  type: 'file' | 'folder';
-  children?: FileStructure[];
-}

@@ -132,7 +132,6 @@ const PreviewComponentInternal = ({
         title="App Preview"
         onLoad={() => {
           // Handle iframe load
-          console.log('Preview iframe loaded');
         }}
         onError={() => {
           setPreviewError('Failed to load preview');

@@ -43,7 +43,7 @@ const AIAppBuilder = () => {
       }, 100); // Stream at 100ms intervals
 
     } catch (error) {
-      console.error('Streaming error:', error);
+      log.error('Streaming error', { error: error instanceof Error ? error.message : 'Unknown error' });
       setIsGenerating(false);
       toast.error('Failed to generate code');
     }
@@ -67,7 +67,6 @@ const AIAppBuilder = () => {
     setSelectedModels(models);
 
     if (!currentProject) {
-      console.log('Creating project...');
       // Create project first
       try {
         const response = await fetch('/api/projects', {
@@ -80,18 +79,14 @@ const AIAppBuilder = () => {
         });
 
         const project = await response.json() as Project;
-        console.log('Project creation response:', response.status, project);
 
         if (response.ok) {
           setCurrentProject(project);
-          console.log('Project created successfully:', project);
-
-          console.log('Switching to builder view and starting generation...');
+          log.info('Project created', { projectId: project.id });
           setView('builder');
           setIsGenerating(true);
 
           try {
-            console.log('Calling generate API with projectId:', project.id);
             const generateResponse = await fetch('/api/generate', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -106,7 +101,7 @@ const AIAppBuilder = () => {
 
           if (result.success && result.files && result.files.length > 0) {
             log.info('Generation successful', {
-              projectId: currentProject?.id,
+              projectId: project.id,
               filesCount: result.files.length,
               promptLength: userPrompt.length,
             });
@@ -124,7 +119,7 @@ const AIAppBuilder = () => {
             toast.error(result.error || 'Generation failed');
           }
           } catch (error) {
-            log.error('Generation error', { error: error instanceof Error ? error.message : 'Unknown error', projectId: currentProject?.id });
+            log.error('Generation error', { error: error instanceof Error ? error.message : 'Unknown error', projectId: project.id });
             setIsGenerating(false);
             toast.error('Failed to generate code');
           }
@@ -135,18 +130,16 @@ const AIAppBuilder = () => {
           return;
         }
       } catch (error) {
-        console.error('Project creation error:', error);
+        log.error('Project creation error', { error: error instanceof Error ? error.message : 'Unknown error' });
         toast.error('Failed to create project');
         return;
       }
     }
 
-    console.log('Switching to builder view and starting generation...');
     setView('builder');
     setIsGenerating(true);
 
     try {
-      console.log('Calling generate API with projectId:', currentProject.id);
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -158,12 +151,10 @@ const AIAppBuilder = () => {
       });
 
       const result = await response.json() as GenerationResult;
-      console.log('Generation response:', response.status, result);
 
       if (result.success && result.files.length > 0) {
         const mainFile = result.files.find((f: ProjectFile) => f.path === 'src/app/page.tsx');
         if (mainFile) {
-          console.log('Found main file, starting real streaming...');
           await handleRealStreaming(mainFile.content);
         } else {
           setIsGenerating(false);
@@ -174,7 +165,7 @@ const AIAppBuilder = () => {
         toast.error(result.error || 'Generation failed');
       }
     } catch (error) {
-      console.error('Generation error:', error);
+      log.error('Generation error', { error: error instanceof Error ? error.message : 'Unknown error', projectId: currentProject.id });
       setIsGenerating(false);
       toast.error('Failed to generate code');
     }

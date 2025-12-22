@@ -1,5 +1,4 @@
 import Groq from 'groq-sdk';
-import { validateEnvironment } from './validation';
 import { env } from './config';
 
 export interface GroqOptions {
@@ -52,13 +51,13 @@ export class GroqClient {
       const completion = await groq.chat.completions.create({
         model: options.model || 'llama-3.3-70b-versatile',
         messages: [{ role: 'user', content: prompt }],
-        temperature: Math.max(0, Math.min(2, options.temperature || 0.7)),
-        max_tokens: Math.max(1, Math.min(32768, options.maxTokens || 8192)),
-        top_p: Math.max(0, Math.min(1, options.topP || 1)),
+        temperature: Math.max(0, Math.min(2, options.temperature ?? 1)),
+        max_tokens: Math.max(1, Math.min(65536, options.maxTokens ?? 8192)),
+        top_p: Math.max(0, Math.min(1, options.topP ?? 1)),
         stream: false,
-        stop: options.stop,
+        stop: options.stop ?? null,
         tools: options.tools,
-      });
+      } as any);
 
       const result = completion.choices[0]?.message?.content;
       if (!result) {
@@ -97,13 +96,13 @@ export class GroqClient {
     const completion = await groq.chat.completions.create({
       model: options.model || 'llama-3.3-70b-versatile',
       messages: [{ role: 'user', content: prompt }],
-      temperature: options.temperature || 0.7,
-      max_tokens: options.maxTokens || 8192,
-      top_p: options.topP || 1,
+      temperature: options.temperature ?? 1,
+      max_tokens: options.maxTokens ?? 8192,
+      top_p: options.topP ?? 1,
       stream: true,
-      stop: options.stop,
+      stop: options.stop ?? null,
       tools: options.tools,
-    });
+    } as any);
 
     for await (const chunk of completion) {
       const content = chunk.choices[0]?.delta?.content || '';
@@ -142,22 +141,36 @@ export class GroqClient {
   }
 
   // Convenience methods for different models
-  async generateWithGPTOSS(prompt: string, options: Omit<GroqOptions, 'model'> = {}): Promise<string> {
-    return this.generateCode(prompt, {
-      ...options,
+  async generateWithGPTOSS(prompt: string, options: Omit<GroqOptions, 'model' | 'tools'> = {}): Promise<string> {
+    const groq = this.initialize();
+    const completion = await groq.chat.completions.create({
       model: 'openai/gpt-oss-120b',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: options.temperature ?? 1,
+      max_tokens: options.maxTokens ?? 65536,
+      top_p: options.topP ?? 1,
+      stream: false,
+      stop: options.stop ?? null,
+      reasoning_effort: 'medium',
       tools: [
-        { type: 'function', function: { name: 'browser_search', description: 'Search the web', parameters: { type: 'object', properties: {} } } },
-        { type: 'function', function: { name: 'code_interpreter', description: 'Execute code', parameters: { type: 'object', properties: {} } } }
-      ] as Groq.Chat.Completions.ChatCompletionTool[],
-    });
+        { type: 'browser_search' },
+        { type: 'code_interpreter' }
+      ] as any,
+    } as any);
+
+    const result = completion.choices[0]?.message?.content;
+    if (!result) {
+      throw new GroqError('No response generated from Groq API');
+    }
+    return this.cleanCodeResponse(result);
   }
 
   async generateWithLlama4Maverick(prompt: string, options: Omit<GroqOptions, 'model'> = {}): Promise<string> {
     return this.generateCode(prompt, {
       ...options,
       model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-      maxTokens: 8192,
+      maxTokens: options.maxTokens ?? 8192,
+      temperature: options.temperature ?? 1,
     });
   }
 
@@ -165,7 +178,8 @@ export class GroqClient {
     return this.generateCode(prompt, {
       ...options,
       model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-      maxTokens: 8192,
+      maxTokens: options.maxTokens ?? 8192,
+      temperature: options.temperature ?? 1,
     });
   }
 
@@ -173,8 +187,8 @@ export class GroqClient {
     return this.generateCode(prompt, {
       ...options,
       model: 'moonshotai/kimi-k2-instruct-0905',
-      temperature: 0.7,
-      maxTokens: 16384,
+      temperature: options.temperature ?? 0.7,
+      maxTokens: options.maxTokens ?? 16384,
     });
   }
 
@@ -182,26 +196,42 @@ export class GroqClient {
     return this.generateCode(prompt, {
       ...options,
       model: 'llama-3.3-70b-versatile',
-      maxTokens: 32768,
+      maxTokens: options.maxTokens ?? 32768,
+      temperature: options.temperature ?? 1,
     });
   }
 
   // Streaming convenience methods
-  async *generateWithGPTOSSStream(prompt: string, options: Omit<GroqOptions, 'model'> = {}): AsyncGenerator<StreamChunk> {
-    yield* this.generateCodeStream(prompt, {
-      ...options,
+  async *generateWithGPTOSSStream(prompt: string, options: Omit<GroqOptions, 'model' | 'tools'> = {}): AsyncGenerator<StreamChunk> {
+    const groq = this.initialize();
+    const completion = await groq.chat.completions.create({
       model: 'openai/gpt-oss-120b',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: options.temperature ?? 1,
+      max_tokens: options.maxTokens ?? 65536,
+      top_p: options.topP ?? 1,
+      stream: true,
+      stop: options.stop ?? null,
+      reasoning_effort: 'medium',
       tools: [
-        { type: 'function', function: { name: 'browser_search', description: 'Search the web', parameters: { type: 'object', properties: {} } } }
-      ] as Groq.Chat.Completions.ChatCompletionTool[],
-    });
+        { type: 'browser_search' },
+        { type: 'code_interpreter' }
+      ] as any,
+    } as any);
+
+    for await (const chunk of completion) {
+      const content = chunk.choices[0]?.delta?.content || '';
+      const finishReason = chunk.choices[0]?.finish_reason;
+      yield { content, finish_reason: finishReason };
+    }
   }
 
   async *generateWithLlama4MaverickStream(prompt: string, options: Omit<GroqOptions, 'model'> = {}): AsyncGenerator<StreamChunk> {
     yield* this.generateCodeStream(prompt, {
       ...options,
       model: 'meta-llama/llama-4-maverick-17b-128e-instruct',
-      maxTokens: 8192,
+      maxTokens: options.maxTokens ?? 8192,
+      temperature: options.temperature ?? 1,
     });
   }
 
@@ -209,7 +239,8 @@ export class GroqClient {
     yield* this.generateCodeStream(prompt, {
       ...options,
       model: 'meta-llama/llama-4-scout-17b-16e-instruct',
-      maxTokens: 8192,
+      maxTokens: options.maxTokens ?? 8192,
+      temperature: options.temperature ?? 1,
     });
   }
 
@@ -217,8 +248,8 @@ export class GroqClient {
     yield* this.generateCodeStream(prompt, {
       ...options,
       model: 'moonshotai/kimi-k2-instruct-0905',
-      temperature: 0.7,
-      maxTokens: 16384,
+      temperature: options.temperature ?? 0.7,
+      maxTokens: options.maxTokens ?? 16384,
     });
   }
 
@@ -226,7 +257,8 @@ export class GroqClient {
     yield* this.generateCodeStream(prompt, {
       ...options,
       model: 'llama-3.3-70b-versatile',
-      maxTokens: 32768,
+      maxTokens: options.maxTokens ?? 32768,
+      temperature: options.temperature ?? 1,
     });
   }
 
