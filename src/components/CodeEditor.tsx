@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Copy, Download } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 
@@ -43,10 +42,10 @@ export function CodeEditor({ code, isStreaming, onCodeChange }: CodeEditorProps)
   };
 
   return (
-    <Card className="flex-1 flex flex-col">
-      <CardHeader className="flex-row items-center justify-between space-y-0 pb-3">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/20">
         <div className="flex items-center gap-2">
-          <CardTitle className="text-base">Generated Code</CardTitle>
+          <h3 className="text-sm font-semibold">Generated Code</h3>
           {isStreaming && (
             <Badge variant="secondary" className="text-xs">
               <div className="w-2 h-2 bg-accent rounded-full animate-pulse mr-1" />
@@ -54,47 +53,47 @@ export function CodeEditor({ code, isStreaming, onCodeChange }: CodeEditorProps)
             </Badge>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="sm" 
             onClick={handleCopyCode}
             disabled={!code}
+            className="h-8 w-8 p-0"
           >
             <Copy size={14} />
           </Button>
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="sm" 
             onClick={handleDownloadCode}
             disabled={!code}
+            className="h-8 w-8 p-0"
           >
             <Download size={14} />
           </Button>
         </div>
-      </CardHeader>
-      <CardContent className="flex-1 p-0">
-        <div className="relative h-full">
-          <textarea
-            ref={textareaRef}
-            value={code}
-            onChange={(e) => onCodeChange(e.target.value)}
-            className={`w-full h-full min-h-[400px] p-4 font-mono text-sm bg-muted/30 border-0 resize-none focus:outline-none focus:ring-2 focus:ring-ring rounded-none ${
-              isStreaming ? 'streaming-cursor' : ''
-            }`}
-            placeholder="Generated React component code will appear here..."
-            spellCheck={false}
-          />
-          {!code && !isStreaming && (
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-              <div className="text-center space-y-2">
-                <div className="text-4xl opacity-20">{'</>'}</div>
-                <div className="text-sm">Generated code will stream here in real-time</div>
-              </div>
+      </div>
+      <div className="flex-1 relative">
+        <textarea
+          ref={textareaRef}
+          value={code}
+          onChange={(e) => onCodeChange(e.target.value)}
+          className={`w-full h-full p-4 font-mono text-sm bg-muted/10 border-0 resize-none focus:outline-none ${
+            isStreaming ? 'streaming-cursor' : ''
+          }`}
+          placeholder="Generated React component code will appear here..."
+          spellCheck={false}
+        />
+        {!code && !isStreaming && (
+          <div className="absolute inset-0 flex items-center justify-center text-muted-foreground pointer-events-none">
+            <div className="text-center space-y-2">
+              <div className="text-4xl opacity-20">{'</>'}</div>
+              <div className="text-sm">Code will stream here in real-time</div>
             </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

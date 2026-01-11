@@ -1,9 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { Eye, ArrowClockwise, Copy, Warning } from "@phosphor-icons/react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Eye, ArrowClockwise } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
 
 interface PreviewPanelProps {
@@ -30,7 +28,7 @@ export function PreviewPanel({ code }: PreviewPanelProps) {
                 align-items: center;
                 justify-content: center;
                 height: 100vh;
-                background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+                background: #fafafa;
               }
               .empty-state {
                 text-align: center;
@@ -49,7 +47,7 @@ export function PreviewPanel({ code }: PreviewPanelProps) {
           <body>
             <div class="empty-state">
               <div class="icon">⚡</div>
-              <div class="text">Generate a component to see live preview</div>
+              <div class="text">Live preview will appear here</div>
             </div>
           </body>
         </html>
@@ -152,72 +150,42 @@ export function PreviewPanel({ code }: PreviewPanelProps) {
     toast.success('Preview refreshed');
   };
 
-  const handleCopyCode = async () => {
-    if (code) {
-      await navigator.clipboard.writeText(code);
-      toast.success('Code copied to clipboard');
-    }
-  };
-
   const renderEmptyState = () => (
     <div className="flex items-center justify-center h-full text-muted-foreground">
       <div className="text-center space-y-3">
         <Eye size={48} className="mx-auto opacity-20" />
         <div className="text-sm">Live preview will appear here</div>
-        <div className="text-xs opacity-75">Interactive component rendering</div>
       </div>
     </div>
   );
 
   return (
-    <Card className="flex-1 flex flex-col">
-      <CardHeader className="flex-row items-center justify-between space-y-0 pb-3">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/20">
         <div className="flex items-center gap-2">
-          <CardTitle className="text-base">Live Preview</CardTitle>
+          <h3 className="text-sm font-semibold">Live Preview</h3>
           {code && (
             <Badge variant={hasError ? "destructive" : "secondary"} className="text-xs">
-              <div className={`w-2 h-2 rounded-full mr-1 ${hasError ? 'bg-red-500' : 'bg-green-500 animate-pulse'}`} />
+              <div className={`w-2 h-2 rounded-full mr-1 ${hasError ? 'bg-red-500' : 'bg-accent animate-pulse'}`} />
               {hasError ? 'Error' : 'Live'}
             </Badge>
           )}
         </div>
         <div className="flex items-center gap-2">
           {code && (
-            <>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleCopyCode}
-                className="h-7 px-2"
-              >
-                <Copy size={14} />
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleRefresh}
-                className="h-7 px-2"
-              >
-                <ArrowClockwise size={14} />
-              </Button>
-            </>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleRefresh}
+              className="h-8 w-8 p-0"
+            >
+              <ArrowClockwise size={14} />
+            </Button>
           )}
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Eye size={14} />
-            Interactive
-          </div>
         </div>
-      </CardHeader>
-      <CardContent className="flex-1 p-4">
-        {hasError && (
-          <Alert className="mb-4">
-            <Warning size={16} />
-            <AlertDescription>
-              There was an issue parsing the generated code. Try refreshing the preview or generating a new component.
-            </AlertDescription>
-          </Alert>
-        )}
-        <div className="h-full min-h-[400px] bg-white rounded-lg overflow-hidden border border-border">
+      </div>
+      <div className="flex-1 p-4 bg-muted/5">
+        <div className="h-full bg-white rounded-md overflow-hidden border border-border">
           {!code ? (
             renderEmptyState()
           ) : (
@@ -229,7 +197,7 @@ export function PreviewPanel({ code }: PreviewPanelProps) {
             />
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

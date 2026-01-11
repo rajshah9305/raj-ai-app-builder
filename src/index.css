@@ -8,26 +8,26 @@
 }
 
 :root {
-  --background: oklch(0.98 0.01 0);
+  --background: oklch(1 0 0);
   --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.65 0.18 45);
+  --primary: oklch(0.15 0 0);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.9 0.01 0);
+  --secondary: oklch(0.97 0.005 0);
   --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.94 0.01 0);
-  --muted-foreground: oklch(0.4 0 0);
-  --accent: oklch(0.7 0.2 35);
+  --muted: oklch(0.97 0.005 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.65 0.18 45);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.65 0.2 20);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.01 0);
-  --input: oklch(0.88 0.01 0);
-  --ring: oklch(0.7 0.2 35);
-  --radius: 0.75rem;
+  --border: oklch(0.9 0.005 0);
+  --input: oklch(0.9 0.005 0);
+  --ring: oklch(0.65 0.18 45);
+  --radius: 0.5rem;
   --font-sans: "IBM Plex Sans";
 }
 
@@ -56,7 +56,6 @@
   --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
-/* Streaming cursor animation */
 .streaming-cursor::after {
   content: '|';
   animation: cursor-blink 1.2s ease-in-out infinite;
@@ -70,30 +69,20 @@
   100% { opacity: 1; }
 }
 
-/* Code editor styles */
 .code-editor {
   font-family: var(--font-family-mono);
   font-size: 13px;
   line-height: 1.6;
 }
 
-/* Enhanced gradient backgrounds */
-.gradient-border {
-  background: linear-gradient(135deg, var(--primary), var(--accent)) padding-box,
-              linear-gradient(135deg, var(--primary), var(--accent)) border-box;
-  border: 2px solid transparent;
-}
-
 body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
-/* Smooth transitions for all interactive elements */
 * {
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Loading animation for AI generation */
 .ai-loading {
   background: linear-gradient(90deg, 
     var(--muted) 25%, 
@@ -113,31 +102,6 @@ body {
   }
 }
 
-/* Preview panel enhancements */
-.preview-container {
-  background: linear-gradient(135deg, 
-    oklch(0.98 0.01 0), 
-    oklch(0.96 0.01 10), 
-    oklch(0.98 0.01 35)
-  );
-}
-
-/* Sandpack customizations */
-.sp-wrapper {
-  border-radius: var(--radius) !important;
-  overflow: hidden;
-}
-
-.sp-layout {
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius) !important;
-}
-
-.sp-preview-container {
-  background: var(--background) !important;
-}
-
-/* Enhanced focus states */
 *:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;

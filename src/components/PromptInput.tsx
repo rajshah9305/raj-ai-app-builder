@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Play, Sparkle } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
 
 interface PromptInputProps {
   onGenerate: (prompt: string) => void;
@@ -28,65 +27,54 @@ export function PromptInput({ onGenerate, isGenerating, disabled }: PromptInputP
   ];
 
   return (
-    <Card className="p-6">
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 text-primary">
-          <Sparkle size={20} weight="fill" />
-          <h2 className="text-lg font-semibold">Describe Your App</h2>
-        </div>
+    <div className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Textarea
+          id="app-prompt"
+          placeholder="Describe the React application you want to build..."
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          className="min-h-[180px] resize-none text-base focus:ring-accent focus:border-accent"
+          disabled={isGenerating || disabled}
+        />
         
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Textarea
-              id="app-prompt"
-              placeholder="Describe the React application you want to build. Be specific about features, styling, and functionality..."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="min-h-[120px] resize-none"
-              disabled={isGenerating || disabled}
-            />
-            <div className="text-xs text-muted-foreground">
-              Tip: Include details about UI components, data handling, and user interactions for best results
-            </div>
-          </div>
-          
-          <Button 
-            type="submit" 
-            className="w-full" 
-            disabled={!prompt.trim() || isGenerating || disabled}
-          >
-            {isGenerating ? (
-              <>
-                <div className="animate-spin mr-2 w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full" />
-                Generating Application...
-              </>
-            ) : (
-              <>
-                <Play size={16} className="mr-2" />
-                Generate React App
-              </>
-            )}
-          </Button>
-        </form>
+        <Button 
+          type="submit" 
+          size="lg"
+          className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-medium" 
+          disabled={!prompt.trim() || isGenerating || disabled}
+        >
+          {isGenerating ? (
+            <>
+              <div className="animate-spin mr-2 w-4 h-4 border-2 border-accent-foreground border-t-transparent rounded-full" />
+              Generating Application...
+            </>
+          ) : (
+            <>
+              Generate App
+              <ArrowRight size={18} className="ml-2" />
+            </>
+          )}
+        </Button>
+      </form>
 
-        {!disabled && (
-          <div className="space-y-3">
-            <div className="text-sm font-medium text-muted-foreground">Example Prompts:</div>
-            <div className="grid gap-2">
-              {examplePrompts.map((example, index) => (
-                <button
-                  key={index}
-                  onClick={() => setPrompt(example)}
-                  className="text-left text-sm p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
-                  disabled={isGenerating}
-                >
-                  {example}
-                </button>
-              ))}
-            </div>
+      {!disabled && (
+        <div className="space-y-3">
+          <div className="text-sm font-medium text-muted-foreground">Try an example:</div>
+          <div className="grid gap-2">
+            {examplePrompts.map((example, index) => (
+              <button
+                key={index}
+                onClick={() => setPrompt(example)}
+                className="text-left text-sm p-3 rounded-md border border-border hover:border-accent hover:bg-accent/5 transition-all"
+                disabled={isGenerating}
+              >
+                {example}
+              </button>
+            ))}
           </div>
-        )}
-      </div>
-    </Card>
+        </div>
+      )}
+    </div>
   );
 }
