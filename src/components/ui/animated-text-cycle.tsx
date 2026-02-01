@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Animated Text Cycle Component
 interface AnimatedTextCycleProps {
@@ -19,16 +19,19 @@ export const AnimatedTextCycle = ({ words, interval = 3000, className = '' }: An
   }, [interval, words.length]);
 
   return (
-    <motion.span
-      key={currentIndex}
-      className={`inline-block font-bold ${className}`}
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 10 }}
-      transition={{ duration: 0.3 }}
-      style={{ whiteSpace: 'nowrap' }}
-    >
-      {words[currentIndex]}
-    </motion.span>
+    <span className={`inline-flex flex-col h-[1.2em] overflow-hidden align-bottom ${className}`}>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={currentIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="inline-block"
+        >
+          {words[currentIndex]}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 };

@@ -134,11 +134,11 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-transparent border border-orange rounded-md hover:border-[#ff6600] focus:outline-none focus:ring-1 focus:ring-[#ff6600] transition-colors text-xs sm:text-xs ${
+        className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-transparent border border-orange rounded-md hover:border-orange focus:outline-none focus:ring-1 focus:ring-orange transition-colors text-xs sm:text-xs ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
-        <SparklesIcon size={12} className="text-[#ff6600] sm:size-3.5" />
+        <SparklesIcon size={12} className="text-orange sm:size-3.5" />
         <span className="text-gray-600 text-xs sm:text-xs">
           {selectedModels.length === 0 ? 'Select AI' : 
            selectedModels.length === 1 ? AI_MODELS.find(m => m.id === selectedModels[0])?.displayName?.split(' ')[0] || 'AI' :
@@ -157,7 +157,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-orange rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto"
+            className="absolute bottom-full right-0 mb-1 w-64 sm:w-80 bg-white border border-orange rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto"
           >
             <div className="p-2">
               <div className="px-3 py-2 text-sm font-medium text-gray-500 border-b border-orange">
@@ -174,7 +174,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                     onClick={() => handleModelToggle(model.id)}
                     disabled={disabled}
                     className={`w-full p-2 text-left hover:bg-gray-50 rounded-md transition-colors text-sm ${
-                      selectedModels.includes(model.id) ? 'bg-[#fff5f0] border border-orange' : ''
+                      selectedModels.includes(model.id) ? 'bg-orange/10 border border-orange' : ''
                     } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <div className="flex items-start justify-between">
@@ -185,7 +185,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                             <div className="flex items-center space-x-1 sm:space-x-2">
                               <span className="font-semibold text-black text-sm sm:text-base">{model.displayName}</span>
                               {model.recommended && (
-                                <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs bg-[#ff6600] text-white rounded-full">
+                                <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-xs bg-orange text-white rounded-full">
                                   Recommended
                                 </span>
                               )}
@@ -212,7 +212,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                       
                       <div className="ml-2 sm:ml-3 flex-shrink-0">
                         {selectedModels.includes(model.id) && (
-                          <CheckIcon size={16} className="text-[#ff6600] sm:size-5" />
+                          <CheckIcon size={16} className="text-orange sm:size-5" />
                         )}
                       </div>
                     </div>
@@ -226,7 +226,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                 💡 Tip: Select multiple models for enhanced reliability
               </div>
               {selectedModels.length > 1 && (
-                <div className="text-xs text-[#ff6600] mt-1 font-medium">
+                <div className="text-xs text-orange mt-1 font-medium">
                   ✨ Multi-model mode active
                 </div>
               )}
