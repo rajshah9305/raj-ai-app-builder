@@ -102,7 +102,7 @@ export class GroqClient {
       stream: true,
       stop: options.stop ?? null,
       tools: options.tools,
-    } as any);
+    } as any) as any;
 
     for await (const chunk of completion) {
       const content = chunk.choices[0]?.delta?.content || '';
@@ -217,7 +217,7 @@ export class GroqClient {
         { type: 'browser_search' },
         { type: 'code_interpreter' }
       ] as any,
-    } as any);
+    } as any) as any;
 
     for await (const chunk of completion) {
       const content = chunk.choices[0]?.delta?.content || '';

@@ -64,7 +64,7 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Describe your app... (e.g., 'Create a todo list with add, delete, and mark as done features')"
-            className="w-full min-h-[120px] max-h-[400px] p-4 sm:p-6 pr-16 sm:pr-24 text-black bg-white border-2 border-black rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent text-base sm:text-lg"
+            className="w-full min-h-[120px] max-h-[400px] p-4 sm:p-6 pr-16 sm:pr-24 text-black bg-white border-2 border-orange rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent text-base sm:text-lg"
             rows={1}
             disabled={isGenerating}
           />
@@ -104,7 +104,7 @@ const InputFormComponent = ({ onSubmit, isGenerating }: InputFormProps) => {
               }
             }}
               disabled={isGenerating}
-              className="p-3 sm:p-4 text-left border border-gray-300 rounded-xl hover:border-[#ff6600] hover:bg-gray-50 transition-colors text-sm sm:text-base text-black disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-3 sm:p-4 text-left border border-orange rounded-xl hover:border-[#ff6600] hover:bg-gray-50 transition-colors text-sm sm:text-base text-black disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="text-xs sm:text-sm">{suggestion}</span>
             </motion.button>

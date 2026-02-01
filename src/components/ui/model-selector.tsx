@@ -119,13 +119,13 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
   const getCategoryColor = (category: AIModel['category']) => {
     switch (category) {
       case 'llama':
-        return 'bg-blue-50 border-blue-200';
+        return 'bg-blue-50 border-orange';
       case 'gpt':
-        return 'bg-green-50 border-green-200';
+        return 'bg-green-50 border-orange';
       case 'kimi':
-        return 'bg-purple-50 border-purple-200';
+        return 'bg-purple-50 border-orange';
       default:
-        return 'bg-gray-50 border-gray-200';
+        return 'bg-gray-50 border-orange';
     }
   };
 
@@ -134,7 +134,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
-        className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-transparent border border-gray-300 rounded-md hover:border-[#ff6600] focus:outline-none focus:ring-1 focus:ring-[#ff6600] transition-colors text-xs sm:text-xs ${
+        className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-1.5 bg-transparent border border-orange rounded-md hover:border-[#ff6600] focus:outline-none focus:ring-1 focus:ring-[#ff6600] transition-colors text-xs sm:text-xs ${
           disabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
@@ -157,10 +157,10 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto"
+            className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-orange rounded-lg shadow-lg z-50 max-h-64 overflow-y-auto"
           >
             <div className="p-2">
-              <div className="px-3 py-2 text-sm font-medium text-gray-500 border-b border-gray-100">
+              <div className="px-3 py-2 text-sm font-medium text-gray-500 border-b border-orange">
                 Select AI Models (Multi-select supported)
               </div>
               
@@ -174,7 +174,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
                     onClick={() => handleModelToggle(model.id)}
                     disabled={disabled}
                     className={`w-full p-2 text-left hover:bg-gray-50 rounded-md transition-colors text-sm ${
-                      selectedModels.includes(model.id) ? 'bg-[#fff5f0] border border-[#ff6600]' : ''
+                      selectedModels.includes(model.id) ? 'bg-[#fff5f0] border border-orange' : ''
                     } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                   >
                     <div className="flex items-start justify-between">
@@ -221,7 +221,7 @@ export const ModelSelector = ({ selectedModels, onModelChange, className = '', d
               ))}
             </div>
             
-            <div className="p-2 sm:p-3 border-t border-gray-100 bg-gray-50 rounded-b-xl">
+            <div className="p-2 sm:p-3 border-t border-orange bg-gray-50 rounded-b-xl">
               <div className="text-xs text-gray-600">
                 💡 Tip: Select multiple models for enhanced reliability
               </div>
