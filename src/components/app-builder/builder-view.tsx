@@ -5,7 +5,7 @@ import { Copy, RotateCcw, Download } from 'lucide-react';
 import Editor from '@monaco-editor/react';
 import { toast } from 'sonner';
 import { StopIcon } from '@/components/icons';
-import { Spinner, EnhancedSpinner } from '@/components/ui/spinner';
+import { Spinner, EnhancedSpinner, LOADING_MESSAGES } from '@/components/ui/spinner';
 import { PreviewComponent } from './preview-component';
 
 interface BuilderViewProps {
@@ -84,7 +84,7 @@ const BuilderViewComponent = ({
               <span className="text-xs text-gray-500 hidden sm:inline">Models:</span>
               <div className="flex items-center gap-1">
                 {selectedModels.slice(0, 1).map((model, index) => (
-                  <span key={model} className="text-xs bg-[#fff5f0] text-[#ff6600] px-2 py-1 rounded-full border border-orange">
+                  <span key={model} className="text-xs bg-orange/10 text-orange px-2 py-1 rounded-full border border-orange">
                     {model.includes('llama-3.3') ? 'Llama 3.3' :
                      model.includes('llama-4-maverick') ? 'Llama 4M' :
                      model.includes('llama-4-scout') ? 'Llama 4S' :
@@ -104,6 +104,7 @@ const BuilderViewComponent = ({
             <EnhancedSpinner
               size={28}
               message="Generating"
+              messages={LOADING_MESSAGES}
               subMessage={`${streamingCode?.length || 0} chars`}
             />
           </div>
@@ -233,15 +234,6 @@ const BuilderViewComponent = ({
                 </div>
               )}
             </div>
-            {(generatedCode || streamingCode) && (
-              <button
-                onClick={() => window.open('about:blank', '_blank')}
-                className="text-xs text-gray-500 hover:text-gray-700 underline"
-                title="Open in new tab"
-              >
-                Pop out →
-              </button>
-            )}
           </div>
           <div className="flex-1 overflow-auto bg-white min-h-[200px] sm:min-h-0">
             <PreviewComponent

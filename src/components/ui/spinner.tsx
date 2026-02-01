@@ -5,44 +5,51 @@ interface EnhancedSpinnerProps {
   size?: number;
   color?: string;
   message?: string;
+  messages?: string[];
   subMessage?: string;
   showProgress?: boolean;
   progress?: number;
 }
 
+export const LOADING_MESSAGES = [
+  'Analyzing requirements...',
+  'Connecting to AI...',
+  'Generating code...',
+  'Finalizing components...'
+];
+
 export const EnhancedSpinner = ({
   size = 60,
   color = '#ff6600',
   message = 'Generating...',
+  messages,
   subMessage,
   showProgress = false,
   progress = 0
 }: EnhancedSpinnerProps) => {
-  const [currentMessage, setCurrentMessage] = useState(message);
+  const [msgIndex, setMsgIndex] = useState(0);
   const [dots, setDots] = useState('');
 
+  const currentMessage = messages && messages.length > 0
+    ? messages[msgIndex % messages.length]
+    : message;
+
   useEffect(() => {
-    const messages = [
-      'Analyzing requirements...',
-      'Connecting to AI...',
-      'Generating code...',
-      'Finalizing components...'
-    ];
-    let messageIndex = 0;
+    if (messages && messages.length > 0) {
+      const messageInterval = setInterval(() => {
+        setMsgIndex(prev => prev + 1);
+      }, 2000);
 
-    const messageInterval = setInterval(() => {
-      messageIndex = (messageIndex + 1) % messages.length;
-      setCurrentMessage(messages[messageIndex]);
-    }, 2000);
+      return () => clearInterval(messageInterval);
+    }
+  }, [messages]);
 
+  useEffect(() => {
     const dotsInterval = setInterval(() => {
       setDots(prev => prev.length >= 3 ? '' : prev + '.');
     }, 500);
 
-    return () => {
-      clearInterval(messageInterval);
-      clearInterval(dotsInterval);
-    };
+    return () => clearInterval(dotsInterval);
   }, []);
 
   return (
