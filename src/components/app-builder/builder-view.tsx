@@ -59,7 +59,7 @@ const BuilderViewComponent = ({
 
   return (
     <div className="h-screen bg-white flex flex-col">
-      <div className="border-b border-gray-200 px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
+      <div className="border-b border-orange px-3 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
         <div className="flex flex-wrap items-center gap-2 sm:gap-4 w-full">
           <button
             onClick={onBack}
@@ -67,7 +67,7 @@ const BuilderViewComponent = ({
           >
             ← Back
           </button>
-          <div className="h-6 w-px bg-gray-300 hidden sm:block" />
+          <div className="h-6 w-px bg-orange hidden sm:block" />
           <button
             onClick={onReset}
             className="px-3 sm:px-4 py-2 text-black hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2 text-sm sm:text-base"
@@ -77,14 +77,14 @@ const BuilderViewComponent = ({
             <span className="hidden sm:inline">New Project</span>
             <span className="sm:hidden">New</span>
           </button>
-          <div className="h-6 w-px bg-gray-300 hidden sm:block" />
+          <div className="h-6 w-px bg-orange hidden sm:block" />
           <h2 className="text-xs sm:text-sm text-gray-600 max-w-xs sm:max-w-md truncate flex-1">{prompt}</h2>
           {selectedModels.length > 0 && (
             <div className="flex items-center gap-1 sm:gap-2 ml-auto">
               <span className="text-xs text-gray-500 hidden sm:inline">Models:</span>
               <div className="flex items-center gap-1">
                 {selectedModels.slice(0, 1).map((model, index) => (
-                  <span key={model} className="text-xs bg-[#fff5f0] text-[#ff6600] px-2 py-1 rounded-full border border-[#ff6600]">
+                  <span key={model} className="text-xs bg-[#fff5f0] text-[#ff6600] px-2 py-1 rounded-full border border-orange">
                     {model.includes('llama-3.3') ? 'Llama 3.3' :
                      model.includes('llama-4-maverick') ? 'Llama 4M' :
                      model.includes('llama-4-scout') ? 'Llama 4S' :
@@ -111,8 +111,8 @@ const BuilderViewComponent = ({
       </div>
 
       <div className="flex-1 flex flex-col sm:flex-row overflow-hidden tablet-spacing">
-        <div className="w-full sm:w-1/2 border-b sm:border-r sm:border-b-0 border-gray-200 flex flex-col">
-          <div className="border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between bg-gray-50">
+        <div className="w-full sm:w-1/2 border-b sm:border-r sm:border-b-0 border-orange flex flex-col">
+          <div className="border-b border-orange px-4 sm:px-6 py-3 flex items-center justify-between bg-gray-50">
             <div className="flex items-center gap-2 sm:gap-3">
               <h3 className="font-medium text-black text-sm sm:text-base">Code</h3>
               {isStreamingComplete && (
@@ -223,7 +223,7 @@ const BuilderViewComponent = ({
         </div>
 
         <div className="w-full sm:w-1/2 flex flex-col">
-          <div className="border-b border-gray-200 px-4 sm:px-6 py-3 bg-gray-50 flex items-center justify-between">
+          <div className="border-b border-orange px-4 sm:px-6 py-3 bg-gray-50 flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <h3 className="font-medium text-black text-sm sm:text-base">Live Preview</h3>
               {(generatedCode || streamingCode) && (

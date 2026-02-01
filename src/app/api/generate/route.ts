@@ -27,8 +27,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json() as { projectId?: string; prompt?: string; models?: string[] };
     const { projectId, prompt, models = ['llama-3.3-70b-versatile'] } = body;
 
+    const safeProjectId = projectId || '';
+    const safePrompt = prompt || '';
+
     // Validate input
-    const projectIdValidation = validateProjectId(projectId);
+    const projectIdValidation = validateProjectId(safeProjectId);
     if (!projectIdValidation.isValid) {
       return NextResponse.json(
         { error: projectIdValidation.errors.join(', '), success: false },
@@ -36,7 +39,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const promptValidation = validatePrompt(prompt);
+    const promptValidation = validatePrompt(safePrompt);
     if (!promptValidation.isValid) {
       return NextResponse.json(
         { error: promptValidation.errors.join(', '), success: false },
@@ -44,13 +47,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await orchestrateGeneration(projectId, prompt, models);
+    const result = await orchestrateGeneration(safeProjectId, safePrompt, models);
 
     const duration = performance.now() - startTime;
     log.api('POST', '/api/generate', 200, duration, {
       clientIP,
-      projectId,
-      promptLength: prompt.length,
+      projectId: safeProjectId,
+      promptLength: safePrompt.length,
       modelsCount: models.length,
       models: models,
       success: result.success,

@@ -114,7 +114,7 @@ const AIAppBuilder = () => {
               toast.success('Code generated successfully!');
             }
           } else {
-            log.error('Generation failed', { error: result.error, projectId: currentProject?.id });
+            log.error('Generation failed', { error: result.error, projectId: project.id });
             setIsGenerating(false);
             toast.error(result.error || 'Generation failed');
           }
@@ -126,7 +126,7 @@ const AIAppBuilder = () => {
 
           return; // Exit early since we handled the generation
         } else {
-          toast.error(project.error || 'Failed to create project');
+          toast.error((project as any).error || 'Failed to create project');
           return;
         }
       } catch (error) {
