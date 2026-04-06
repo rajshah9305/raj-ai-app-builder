@@ -193,7 +193,7 @@ export function PreviewPanel({ code }: PreviewPanelProps) {
               ref={iframeRef}
               title="Component Preview"
               className="w-full h-full border-0"
-              sandbox="allow-scripts"
+              sandbox="allow-scripts allow-same-origin"
             />
           )}
         </div>
